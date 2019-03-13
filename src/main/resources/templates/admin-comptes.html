@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
+<head th:insert="fragments/fragments.html :: header"/>
+	
+	<body>
+			
+		<div th:replace="fragments/fragments.html :: navigation"></div>
+		
+		<div class="container">
+			<div class="card">
+				  <div class="card-header">
+				    <h2>Comptes bancaires</h2>
+				  </div>
+				  <div class="card-body">
+				    <table class="table">
+				    <thead>
+					    <tr>
+					      <th scope="col">Identifiant</th>
+					      <th scope="col">Solde initial</th>
+					      <th scope="col">Solde actuel</th>
+					    </tr>
+					  </thead>
+				    <tbody>
+					    <tr th:each="cpt:${comptes}">
+					        <td th:text="${cpt.identifiant}" />
+					        <td th:text="${cpt.soldeInitial}" />
+					        <td th:text="${cpt.solde}" />
+					    </tr>
+					    
+					    
+					</tbody>
+					</table>
+				  </div>  
+			</div>
+			
+			
+			
+		</div><!--  fin container -->
+		
+		
+		<div th:replace="fragments/fragments.html :: scripts"></div>
+		
+	</body>
+	</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
+<head th:insert="fragments/fragments.html :: header"/>
+	
+	<body>
+			
+		<div th:replace="fragments/fragments.html :: navigation"></div>
+		
+		<div class="container">
+			<div class="card">
+				  <div class="card-header">
+				    <h2 th:text="'Compte bancaire, [' + ${compte.id} + '-' + ${compte.identifiant} + ']' + 'Solde initial: ' + ${compte.soldeInitial}">[]</h2>
+				  </div>
+				  <div class="card-body">
+				    <table class="table">
+				    <thead>
+					    <tr>
+					      <th scope="col">Identifiant</th>
+					      <th scope="col">Solde</th>
+					    </tr>
+					  </thead>
+				    <tbody>
+					    <tr th:each="cpt:${compte}">
+					        <td th:text="${cpt.identifiant}" />
+					        <td th:text="${cpt.solde}" />
+					    </tr>
+					    
+					    
+					</tbody>
+					</table>
+				  </div>  
+			</div>
+			
+			<div class="card">
+				  <div class="card-header">
+				    <h2>Transactions</h2>
+				  </div>
+				  <div class="card-body">
+				    <table class="table">
+				    <thead>
+					    <tr>
+					    
+					      <th scope="col">Date</th>
+					      <th scope="col">Debit</th>
+					      <th scope="col">Credit</th>
+					      <th scope="col">Description</th>
+					      
+					    </tr>
+					  </thead>
+				    <tbody>
+					    <tr th:each="transaction:${transactions}">
+					        <td th:text="${transaction.date}" />
+					       <td th:text="${transaction.debiteur.id == compte.id} ? ${transaction.montant} : ''"/>
+    					   <td th:text="${transaction.crediteur.id == compte.id} ? ${transaction.montant} : ''"/>
+    					   <td th:text="${transaction.description}" />
+					    </tr>
+					    
+					    
+					</tbody>
+					</table>
+				  </div>  
+				  <a sec:authorize="isAuthenticated()" class="btn btn-success" href="/saisie_transfert" role="button">Transfert</a>
+	
+			</div>
+		</div><!--  fin container -->
+		
+		
+		<div th:replace="fragments/fragments.html :: scripts"></div>
+		
+	</body>
+	</html>

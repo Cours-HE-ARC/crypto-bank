@@ -1,0 +1,74 @@
+<!--  *************** fragment du header *************** -->
+<head th:fragment="header">
+<title>Spring Boot Thymeleaf</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link rel="stylesheet" type="text/css"
+	href="webjars/bootstrap/4.1.3/css/bootstrap.min.css" />
+
+<link rel="stylesheet" type="text/css" th:href="@{/css/accueil.css}" />
+</head>
+
+<!--  *************** fragment de navigation *************** -->
+<div th:fragment="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/">Accueil</a>
+  <button class="navbar-toggler" type="button" data-toggle="dropdown" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      
+      
+      <li sec:authorize="isAuthenticated()" class="nav-item dropdown">
+        <a class="btn btn-secondary dropdown-toggle" role="button" id="navbarDropdown" href="#" data-toggle="dropdown">
+          Menu
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a sec:authorize="hasRole('ADMIN')"
+          class="dropdown-item" href="/comptes">Admin Comptes Bancaires
+          </a>
+          
+          <a sec:authorize="hasRole('USER')" class="dropdown-item" href="/compte">Compte Bancaire
+          </a>
+          
+          <a sec:authorize="hasRole('USER')" class="dropdown-item" href="/saisie_transfert">Transfert
+          </a>
+          
+        </div>
+      </li>
+      
+      <li class="nav-item active">
+        <a class="nav-link" href="/">
+        	<span style="text-color:red" th:text="${page}"></span> 
+           <span class="sr-only">(current)</span>
+        </a>
+      </li>
+      
+      
+    </ul>
+    <div th:replace="fragments/fragments.html :: logout"></div>
+  </div>
+</nav>
+
+</div>
+
+<!--  *************** fragment js *************** -->
+<div th:fragment="scripts">
+	<script type="text/javascript" src="webjars/jquery/dist/jquery.min.js"></script>	
+	<script type="text/javascript" src="webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</div>
+
+<!--  **************** logout ****************** -->
+<div th:fragment="logout" class="logout" sec:authorize="isAuthenticated()">		
+            Utilisateur: <span sec:authentication="name">[]</span> - Roles: <span sec:authentication="principal.authorities"></span>				
+    <div>
+        <form action="#" th:action="@{/logout}" method="post">					
+            <input class="btn btn-danger btn-sm"type="submit" value="Déconnexion" />
+        </form>
+    </div>
+</div>
+   
+    
+  

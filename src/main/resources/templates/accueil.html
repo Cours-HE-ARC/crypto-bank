@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head th:insert="fragments/fragments.html :: header"/>
+
+	<body>
+
+		<div th:replace="fragments/fragments.html :: navigation"></div>
+	
+		<div class="container">
+			<div class="jumbotron">
+			  <h1 class="display-4">CryptoBank</h1>
+			  <p class="lead">Application fictive de plateforme d'échange de crpyto-monnaie, 
+			  destinée à illustrer la sécurisation d'une application web</p>
+			  
+			  <hr class="my-4">
+			  <a sec:authorize="!isAuthenticated()" class="btn btn-success" href="/login" role="button">Connection</a>
+			  
+			  <a sec:authorize="isAuthenticated() && hasRole('USER')" class="btn btn-success" href="/compte" role="button">Compte</a>
+			  <a sec:authorize="isAuthenticated() && hasRole('USER')" class="btn btn-success" href="/saisie_transfert" role="button">Transfert</a>
+			  <a sec:authorize="isAuthenticated() && hasRole('ADMIN')" class="btn btn-success" href="/comptes" role="button">Administration des comptes</a>
+			
+			</div>
+			
+		</div>
+		
+		<div th:replace="fragments/fragments.html :: scripts"></div>
+		
+	</body>
+</html>

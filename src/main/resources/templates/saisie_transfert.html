@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	
+	<head th:insert="fragments/fragments.html :: header"/>
+	
+	<body>
+			
+		<div th:replace="fragments/fragments.html :: navigation"></div>
+		
+		<div class="container">
+			
+				  
+				  
+				  <div class="card">
+				  <div class="card-header">
+				    <h2>Transfert</h2>
+				  </div>
+				  <div class="card-body">
+				    <form action="#" th:action="@{/transfert}" th:object="${transfert}" method="post">
+					     <div class="form-group">
+					    	<label for="montant" th:text="#{transfert.montant}" /></label>
+					    	<input type="number" th:field="*{montant}" class="form-control" id="montant" placeholder="Montant">
+					    	<small id="nomHelp" class="form-text text-muted">Insérez le montant du transfert</small>
+					    </div>
+					    
+					    <div class="form-group">
+					    	<label for="description" th:text="#{transfert.description}" /></label>
+					    	<input type="text" th:field="*{description}" class="form-control" id="description" placeholder="Description">
+					    	<small id="nomHelp" class="form-text text-muted">Insérez la description du transfert</small>
+					    </div>
+					    
+					    <div class="form-group">
+					    	<label for="compte" th:text="#{transfert.compte}" /></label>
+					    	<select th:field="*{noDebiteur}" id="compte" name="compte">
+							    <option th:each="compte : ${comptes_dispo}" 
+					               th:value="${compte.identifiant}" 
+					               th:text="${compte.identifiant}">
+					       </option>
+							    
+							</select>
+					    </div>
+					    
+					    
+					   <button type="submit" class="btn btn-primary">Sauvegarder</button>
+						  
+					</form>
+
+				</div>
+				</div>
+		
+		
+		<div th:replace="fragments/fragments.html :: scripts"></div>
+		
+	</body>
+</html>
